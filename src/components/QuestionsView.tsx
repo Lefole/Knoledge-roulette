@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 
 function range(n: number) {
   return Array.from({ length: n }).map((_, index) => index);

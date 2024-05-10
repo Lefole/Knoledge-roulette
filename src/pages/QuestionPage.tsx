@@ -1,9 +1,12 @@
 import OptionButton from "../components/OptionButton";
 import { clsx } from "clsx";
 import ContinueButton from "../components/ContinueButton";
+import { useState } from "react";
+import { getanswersByQuestion } from "../services/questionService";
 
 const QuestionPage = () => {
   const isNormaldirectory = false;
+  const [someOptionPressed, setSomeOptionPressed] = useState(false);
 
   return (
     <div className="flex h-full w-full flex-col gap-5 px-10">
@@ -24,14 +27,17 @@ const QuestionPage = () => {
             "grid grid-cols-2": !isNormaldirectory,
           })}
         >
-          <OptionButton text="a" onClick={() => {}} />
-          <OptionButton text="a" onClick={() => {}} />
-          <OptionButton text="a" onClick={() => {}} />
-          <OptionButton text="a" onClick={() => {}} />
+          {getanswersByQuestion(2).map((value) => (
+            <OptionButton
+              text={value.text}
+              isCorrect={value.isCorrect}
+              isDisabled={someOptionPressed}
+            />
+          ))}
         </div>
       </div>
-      <div className="disabled: mr-20 flex items-center justify-end">
-        <ContinueButton destinyRoute="../" />
+      <div className="mr-20 flex items-center justify-end">
+        <ContinueButton destinyRoute="../" isDisabled={someOptionPressed} />
       </div>
     </div>
   );
