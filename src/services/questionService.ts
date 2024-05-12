@@ -1,7 +1,9 @@
+import { axiosInstance } from "../config/axios_config";
 import { AnswerModel } from "../models/answerModel";
 
-export const getQuestionById = (idQuestion: number) => {
-  return;
+export const getQuestionsBySubject = async (subjectId: number) => {
+  const questions = await axiosInstance.get(`questions/${subjectId}`);
+  return questions.data;
 };
 
 export const getanswersByQuestion = (idQuestion: number) => {

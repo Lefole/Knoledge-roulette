@@ -6,15 +6,19 @@ import { getAllParticipants } from "../services/participantService";
 
 interface ContinueButtonProps {
   destinyRoute: string;
-  isDisabled: boolean;
+  disabled: boolean;
+  onClick: () => void;
 }
 
 const ContinueButton: React.FC<ContinueButtonProps> = ({
   destinyRoute,
-  isDisabled,
+  disabled,
+  onClick,
 }) => {
   const { pathname } = useLocation();
   const {
+    currentRound,
+    maxRounds,
     currentParticipantIndex,
     changeParticipant,
     incrementRound,
@@ -24,22 +28,27 @@ const ContinueButton: React.FC<ContinueButtonProps> = ({
   return (
     <Link
       onClick={async () => {
-        if (pathname.includes("question")) {
-          changeParticipant();
-          const participants = await getAllParticipants();
-          if (currentParticipantIndex == participants.length - 1) {
-            incrementRound();
-            resetParticipantsIndex();
-          }
-        }
+        onClick();
+        // if (pathname.includes("question")) {
+        //   changeParticipant();
+        //   const participants = await getAllParticipants();
+        //   if (currentParticipantIndex == participants.length - 1) {
+        //     incrementRound();
+        //     resetParticipantsIndex();
+        //   }
+        // }
       }}
-      to={destinyRoute}
+      to={
+        currentRound >= maxRounds && destinyRoute == "game/"
+          ? "resume"
+          : destinyRoute
+      }
       className={clsx(
         "rounded-md px-6 py-2 text-xl font-semibold text-white shadow-md hover:shadow-lg",
         {
           "bg-green-400 hover:bg-green-500  active:bg-green-700 active:shadow-none":
-            isDisabled,
-          "bg-green-200": !isDisabled,
+            !disabled,
+          "bg-green-200": disabled,
         }
       )}
     >

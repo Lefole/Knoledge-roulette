@@ -1,16 +1,6 @@
-import axios from "axios";
-import { SubjectModel } from "../models/subjectModel";
+import { axiosInstance } from "../config/axios_config";
 
-const getAllSubjects = () => {
-  axios.get("");
-  const subjects: SubjectModel[] = [
-    { id: 1, name: "A" },
-    { id: 2, name: "B" },
-    { id: 3, name: "C" },
-    { id: 4, name: "D" },
-    { id: 5, name: "E" },
-  ];
-  return subjects;
+export const getAllSubjects = async () => {
+  const subjects = await axiosInstance.get("subjects");
+  return subjects.data;
 };
-
-export { getAllSubjects };

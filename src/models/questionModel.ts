@@ -1,5 +1,6 @@
-export type questionModel = {
-  id: number;
+export type QuestionModel = {
+  id_question: number;
   question_text: string;
   question_route: string;
+  have_image: boolean;
 };

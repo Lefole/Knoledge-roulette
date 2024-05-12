@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 interface RoundStore {
+  maxRounds: number;
   currentRound: number;
   currentParticipantIndex: number;
   incrementRound: () => void;
@@ -9,6 +10,7 @@ interface RoundStore {
 }
 
 export const useRoundStore = create<RoundStore>((set) => ({
+  maxRounds: 5,
   currentRound: 0,
   currentParticipantIndex: 0,
   incrementRound: () =>

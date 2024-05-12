@@ -5,9 +5,9 @@ import Index from "./pages/Index";
 
 import "./index.css";
 import Game from "./templates/Game";
-import 
-RoulettePage from "./pages/RoulettePage";
+import RoulettePage from "./pages/RoulettePage";
 import QuestionPage from "./pages/QuestionPage";
+import ResumePage from "./pages/ResumePage";
 
 const router = createBrowserRouter([
   {
@@ -15,17 +15,21 @@ const router = createBrowserRouter([
     element: <Index />,
   },
   {
-    path: "/game/",
+    path: "/game",
     element: <Game />,
     children: [
-      { path: "/game/", element: <RoulettePage /> },
+      { path: "/game", element: <RoulettePage /> },
       { path: "/game/question/:questionId", element: <QuestionPage /> },
     ],
+  },
+  {
+    path: "/resume",
+    element: <ResumePage />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </React.StrictMode>
 );

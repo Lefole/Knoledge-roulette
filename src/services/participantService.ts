@@ -1,31 +1,18 @@
-import { ParticipantModel } from "../models/participantModel";
+import { axiosInstance } from "../config/axios_config";
 
-const getPartipantById = (idParticipant: number) => {
+export const getPartipantById = (idParticipant: number) => {
   console.log(idParticipant);
   return [];
 };
 
-const getAllParticipants = () => {
-  const participants: ParticipantModel[] = [
-    { id: 1, name: "Pepe Nacho" },
-    { id: 2, name: "Carlo Julio" },
-    { id: 3, name: "Swalalala" },
-  ];
-  return participants;
+export const getAllParticipants = async () => {
+  const participants_req = await axiosInstance.get(
+    "https://fakestoreapi.com/products/"
+  );
+  return participants_req.data;
 };
 
-const getAllParticipantsWithScores = () => {
-  return [];
-};
-
-const getLifelinesStatusFromParticipant = (idParticipant: number) => {
+export const getLifelinesStatusFromParticipant = (idParticipant: number) => {
   console.log(idParticipant);
   return [];
-};
-
-export {
-  getPartipantById,
-  getAllParticipants,
-  getAllParticipantsWithScores,
-  getLifelinesStatusFromParticipant,
 };

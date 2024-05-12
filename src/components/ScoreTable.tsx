@@ -1,17 +1,19 @@
-import React from "react";
-import { getAllParticipants } from "../services/participantService";
+import useParticipantsLoading from "../hooks/useParticipantsLoading";
+import ParticipantRow from "./ParticipantRow";
 
 const ScoreTable = () => {
-  const participants = getAllParticipants();
-  const orderedParticipants = participants.sort((value) => value.id);
+  const [participants, loading] = useParticipantsLoading(true);
   return (
     <div className="flex flex-col">
-      {orderedParticipants.map((value) => (
-        <div className="flex justify-between">
-          <div>{value.name}</div>
-          <div>{value.id}</div>
-        </div>
-      ))}
+      {!loading &&
+        participants.map((value, index) => (
+          <ParticipantRow
+            key={index}
+            name={value.name}
+            score={value.score}
+            first={index == 0 && value.score != 0}
+          />
+        ))}
     </div>
   );
 };

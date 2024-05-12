@@ -1,25 +1,23 @@
 import React from "react";
-import { Progress } from "@/components/ui/progress";
-
 import ScoreTable from "./ScoreTable";
 import { useLocation } from "react-router-dom";
-
 import ComodinSection from "./ComodinSection";
 import { useRoundStore } from "../state/roundStore";
+import RoundProgress from "./RoundProgress";
 
 const GameInfo = () => {
   const { pathname } = useLocation();
-  const { currentRound } = useRoundStore();
+  const { currentRound, maxRounds } = useRoundStore();
   return (
     <div className="flex h-full flex-col justify-between px-6 py-4">
-      <>
-        {/* /<LinearProgressWithLabel value={30} /> */}
-        <h3>{`Avance: ${currentRound}`}</h3>
-        <h3 className="mb-2 w-full text-xl font-semibold italic text-neutral-700">
+      <div>
+        <RoundProgress currentRound={currentRound} maxRounds={maxRounds} />
+        <h3 className="mt-4 mb-2 w-full text-xl font-semibold italic text-neutral-700">
           Participantes
         </h3>
         <ScoreTable />
-      </>
+      </div>
+
       {pathname === "/game/" && (
         <div className="mt-auto">
           <h3 className="mb-2 w-full text-xl font-semibold italic text-neutral-700">
