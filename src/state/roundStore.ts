@@ -10,7 +10,7 @@ interface RoundStore {
 }
 
 export const useRoundStore = create<RoundStore>((set) => ({
-  maxRounds: 5,
+  maxRounds: 3,
   currentRound: 0,
   currentParticipantIndex: 0,
   incrementRound: () =>
