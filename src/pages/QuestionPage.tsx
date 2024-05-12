@@ -5,11 +5,13 @@ import { getanswersByQuestion } from "../services/questionService";
 import { useOptionPressed } from "../state/optionPressed";
 import QuestionPlace from "../components/QuestionPlace";
 import { useLifelinePressed } from "../state/lifelinePressed";
+import { useQuestionRandom } from "../state/questionRandom";
 
 const QuestionPage = () => {
   const isNormaldirectory = false;
   const { option, setOption } = useOptionPressed();
   const { fifthy_fifthy } = useLifelinePressed();
+  const { question } = useQuestionRandom();
 
   const false_answers = getanswersByQuestion(0).filter(
     (value) => !value.isCorrect
@@ -22,24 +24,27 @@ const QuestionPage = () => {
         {/* Pregunta */}
         <div
           className={clsx("w-full rounded-lg bg-fuchsia-700", {
-            "h-3/5": isNormaldirectory,
-            "h-4/5": !isNormaldirectory,
+            "h-2/5": !question?.have_image,
+            "h-4/5": question?.have_image,
           })}
         >
-          <QuestionPlace />
+          <QuestionPlace
+            questionText={question != null ? question.question_text : ""}
+          />
         </div>
 
         {/* Respuestas */}
         <div
           className={clsx("w-full gap-4", {
-            "flex flex-shrink-0 flex-col": isNormaldirectory,
-            "grid grid-cols-2": !isNormaldirectory,
+            "flex flex-shrink-0 flex-col": !question?.have_image,
+            "grid grid-cols-2": question?.have_image,
           })}
         >
           {getanswersByQuestion(0).map(
-            (value) => {
+            (value, index) => {
               return (
                 <OptionButton
+                  key={index}
                   value={value.id}
                   optionSelected={option}
                   text={value.text}
