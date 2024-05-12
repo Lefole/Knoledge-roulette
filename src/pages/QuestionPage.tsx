@@ -10,11 +10,10 @@ import { useRouletteSpin } from "../state/rouletteSpin";
 import { useRoundStore } from "../state/roundStore";
 
 const QuestionPage = () => {
-  const { option, setOption } = useOptionPressed();
+  const { option, setOption, setCorrect } = useOptionPressed();
   const { fifthy_fifthy } = useLifelinePressed();
   const [answers, loading, randomFalseAnswer] = useAnswersLoading();
   const { question } = useQuestionRandom();
-  //const { currentParticipantIndex } = useRoundStore();
   const { setRouletteResult } = useRouletteSpin();
   const { setQuestionResult } = useQuestionRandom();
 
@@ -26,6 +25,7 @@ const QuestionPage = () => {
     incrementRound,
     resetParticipantsIndex,
   } = useRoundStore();
+
   return (
     <div className="flex h-full w-full flex-col gap-5 px-10">
       <div className="flex h-full w-full flex-col gap-5">
@@ -53,16 +53,19 @@ const QuestionPage = () => {
               return (
                 <OptionButton
                   key={index}
-                  value={value.id_option}
+                  value={value.option_id}
                   optionSelected={option}
                   text={value.option_text}
                   isCorrect={value.is_correct}
                   disabled={option != -1}
-                  onClick={() => setOption(value.id_option)}
+                  onClick={() => {
+                    setOption(value.option_id);
+                    setCorrect(value.is_correct);
+                  }}
                   className={clsx("", {
                     hidden:
                       fifthy_fifthy &&
-                      answers[randomFalseAnswer].id_option != value.id_option &&
+                      answers[randomFalseAnswer].option_id != value.option_id &&
                       !value.is_correct,
                   })}
                 />

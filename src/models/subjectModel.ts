@@ -1,5 +1,5 @@
 export type SubjectModel = {
-  id: number;
+  subject_id: number;
   name: string;
   question_count: number;
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useRouletteSpin } from "../state/rouletteSpin";
@@ -26,7 +26,6 @@ const QuestionsView = () => {
         const randomQuestion = Math.floor(Math.random() * questions.length);
         setSelectedQuestionIndex(randomQuestion);
         setQuestionResult(randomQuestion, questions[randomQuestion]);
-        console.log(selectedQuestionIndex);
       }, 2000);
     }
   }, [loading, questions]);

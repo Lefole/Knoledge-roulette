@@ -1,6 +1,6 @@
 export type AnswerModel = {
-  id_option: number;
-  id_question: number;
+  option_id: number;
+  question_id: number;
   option_text: string;
   is_correct: boolean;
 };

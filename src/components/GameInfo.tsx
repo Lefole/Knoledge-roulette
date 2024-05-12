@@ -1,4 +1,3 @@
-import React from "react";
 import ScoreTable from "./ScoreTable";
 import { useLocation } from "react-router-dom";
 import ComodinSection from "./ComodinSection";

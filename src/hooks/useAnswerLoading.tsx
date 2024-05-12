@@ -12,12 +12,12 @@ export const useAnswersLoading = (): [AnswerModel[], boolean, number] => {
   useEffect(() => {
     setLoading(true);
     if (question == null) return;
-    getanswersByQuestion(question.id_question).then(
+    getanswersByQuestion(question.question_id).then(
       (anwsers: AnswerModel[]) => {
         setAnswers(anwsers);
         const false_answers = anwsers.filter((value) => !value.is_correct);
         const randomNumber = Math.floor(Math.random() * false_answers.length);
-        setRandomFalseAnswer(false_answers[randomNumber].id_option);
+        setRandomFalseAnswer(false_answers[randomNumber].option_id);
       }
     );
     setLoading(false);

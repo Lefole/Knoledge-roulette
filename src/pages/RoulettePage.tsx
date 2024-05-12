@@ -22,6 +22,7 @@ const RoulettePage = () => {
       <div className="mr-20 flex h-1/6 items-center justify-end">
         <ContinueButton
           onClick={() => {}}
+          end={false}
           destinyRoute={
             roulete_result == -1 || question_result == -1
               ? ""
