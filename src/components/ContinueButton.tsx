@@ -1,12 +1,11 @@
 import clsx from "clsx";
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useRoundStore } from "../state/roundStore";
-import { getAllParticipants } from "../services/participantService";
+import { Link } from "react-router-dom";
 
 interface ContinueButtonProps {
   destinyRoute: string;
   disabled: boolean;
+  end: boolean;
   onClick: () => void;
 }
 
@@ -14,35 +13,20 @@ const ContinueButton: React.FC<ContinueButtonProps> = ({
   destinyRoute,
   disabled,
   onClick,
+  end,
 }) => {
-  const { pathname } = useLocation();
-  const {
-    currentRound,
-    maxRounds,
-    currentParticipantIndex,
-    changeParticipant,
-    incrementRound,
-    resetParticipantsIndex,
-  } = useRoundStore();
-
-  return (
+  return end ? (
     <Link
-      onClick={async () => {
-        onClick();
-        // if (pathname.includes("question")) {
-        //   changeParticipant();
-        //   const participants = await getAllParticipants();
-        //   if (currentParticipantIndex == participants.length - 1) {
-        //     incrementRound();
-        //     resetParticipantsIndex();
-        //   }
-        // }
-      }}
-      to={
-        currentRound >= maxRounds && destinyRoute == "game/"
-          ? "resume"
-          : destinyRoute
-      }
+      className="rounded-md px-6 py-2 text-xl font-semibold text-white shadow-md hover:shadow-lg 
+      bg-red-600 hover:bg-red-700  active:bg-red-500 active:shadow-none"
+      to={"/resume"}
+    >
+      Terminar
+    </Link>
+  ) : (
+    <Link
+      onClick={onClick}
+      to={destinyRoute}
       className={clsx(
         "rounded-md px-6 py-2 text-xl font-semibold text-white shadow-md hover:shadow-lg",
         {

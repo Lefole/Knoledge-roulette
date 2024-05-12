@@ -6,12 +6,26 @@ import QuestionPlace from "../components/QuestionPlace";
 import { useLifelinePressed } from "../state/lifelinePressed";
 import { useQuestionRandom } from "../state/questionRandom";
 import { useAnswersLoading } from "../hooks/useAnswerLoading";
+import { useRouletteSpin } from "../state/rouletteSpin";
+import { useRoundStore } from "../state/roundStore";
 
 const QuestionPage = () => {
   const { option, setOption } = useOptionPressed();
   const { fifthy_fifthy } = useLifelinePressed();
-  const { question } = useQuestionRandom();
   const [answers, loading, randomFalseAnswer] = useAnswersLoading();
+  const { question } = useQuestionRandom();
+  //const { currentParticipantIndex } = useRoundStore();
+  const { setRouletteResult } = useRouletteSpin();
+  const { setQuestionResult } = useQuestionRandom();
+
+  const {
+    currentRound,
+    maxRounds,
+    currentParticipantIndex,
+    changeParticipant,
+    incrementRound,
+    resetParticipantsIndex,
+  } = useRoundStore();
   return (
     <div className="flex h-full w-full flex-col gap-5 px-10">
       <div className="flex h-full w-full flex-col gap-5">
@@ -60,8 +74,18 @@ const QuestionPage = () => {
         <ContinueButton
           key={"bttn_continue_question_page"}
           destinyRoute="../"
+          end={maxRounds == currentRound && currentParticipantIndex == 2}
           disabled={option == -1}
-          onClick={() => setOption(-1)}
+          onClick={() => {
+            changeParticipant();
+            if (currentParticipantIndex >= 2) {
+              incrementRound();
+              resetParticipantsIndex();
+            }
+            setOption(-1);
+            setRouletteResult(-1);
+            setQuestionResult(-1, null);
+          }}
         />
       </div>
     </div>
