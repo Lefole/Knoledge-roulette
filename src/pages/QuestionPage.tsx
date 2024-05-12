@@ -1,23 +1,17 @@
 import OptionButton from "../components/OptionButton";
 import { clsx } from "clsx";
 import ContinueButton from "../components/ContinueButton";
-import { getanswersByQuestion } from "../services/questionService";
 import { useOptionPressed } from "../state/optionPressed";
 import QuestionPlace from "../components/QuestionPlace";
 import { useLifelinePressed } from "../state/lifelinePressed";
 import { useQuestionRandom } from "../state/questionRandom";
+import { useAnswersLoading } from "../hooks/useAnswerLoading";
 
 const QuestionPage = () => {
-  const isNormaldirectory = false;
   const { option, setOption } = useOptionPressed();
   const { fifthy_fifthy } = useLifelinePressed();
   const { question } = useQuestionRandom();
-
-  const false_answers = getanswersByQuestion(0).filter(
-    (value) => !value.isCorrect
-  );
-  const randomNumber = Math.floor(Math.random() * false_answers.length);
-
+  const [answers, loading, randomFalseAnswer] = useAnswersLoading();
   return (
     <div className="flex h-full w-full flex-col gap-5 px-10">
       <div className="flex h-full w-full flex-col gap-5">
@@ -40,40 +34,26 @@ const QuestionPage = () => {
             "grid grid-cols-2": question?.have_image,
           })}
         >
-          {getanswersByQuestion(0).map(
-            (value, index) => {
+          {!loading &&
+            answers.map((value, index) => {
               return (
                 <OptionButton
                   key={index}
-                  value={value.id}
+                  value={value.id_option}
                   optionSelected={option}
-                  text={value.text}
-                  isCorrect={value.isCorrect}
+                  text={value.option_text}
+                  isCorrect={value.is_correct}
                   disabled={option != -1}
-                  onClick={() => setOption(value.id)}
-                  className={
-                    clsx("", {
-                      hidden:
-                        fifthy_fifthy &&
-                        false_answers[randomNumber].id != value.id &&
-                        !value.isCorrect,
-                    })
-                    // ((fifthy_fifthy && false_answers[randomNumber].id == value.id) ||(fif))
-                    //   ? ""
-                    //   : "hidden"
-                  }
+                  onClick={() => setOption(value.id_option)}
+                  className={clsx("", {
+                    hidden:
+                      fifthy_fifthy &&
+                      answers[randomFalseAnswer].id_option != value.id_option &&
+                      !value.is_correct,
+                  })}
                 />
               );
-            }
-            // <OptionButton
-            //   value={value.id}
-            //   optionSelected={option}
-            //   text={value.text}
-            //   isCorrect={value.isCorrect}
-            //   disabled={option != -1}
-            //   onClick={() => setOption(value.id)}
-            // />
-          )}
+            })}
         </div>
       </div>
       <div className="mr-20 flex items-center justify-end">
