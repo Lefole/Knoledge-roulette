@@ -38,6 +38,7 @@ const QuestionPage = () => {
         >
           <QuestionPlace
             questionText={question != null ? question.question_text : ""}
+            image_path={question?.have_image ? "a" : ""}
           />
         </div>
 

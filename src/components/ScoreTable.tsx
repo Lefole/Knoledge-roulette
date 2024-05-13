@@ -1,4 +1,4 @@
-import useParticipantsLoading from "../hooks/useParticipantsLoading";
+import { useParticipantsLoading } from "../hooks/useParticipantsLoading";
 import ParticipantRow from "./ParticipantRow";
 
 const ScoreTable = () => {
@@ -10,8 +10,8 @@ const ScoreTable = () => {
           <ParticipantRow
             key={index}
             name={value.name}
-            score={value.score}
-            first={index == 0 && value.score != 0}
+            score={0}
+            first={index == 0 && 0 != 0}
           />
         ))}
     </div>

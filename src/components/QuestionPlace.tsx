@@ -3,9 +3,13 @@ import Cronometer from "./Cronometer";
 
 interface QuestionPlaceProps {
   questionText: string;
+  image_path: string;
 }
 
-const QuestionPlace: React.FC<QuestionPlaceProps> = ({ questionText }) => {
+const QuestionPlace: React.FC<QuestionPlaceProps> = ({
+  questionText,
+  image_path,
+}) => {
   return (
     <div className="h-full p-5">
       <div className="h-fit flex justify-end text-white font-semibold text-md items-center gap-2">
@@ -13,6 +17,9 @@ const QuestionPlace: React.FC<QuestionPlaceProps> = ({ questionText }) => {
       </div>
       <div className="mt-5 px-5 text-white text-2xl font-medium text-ellipsis">
         {questionText}
+      </div>
+      <div>
+        {image_path != "" && <img src={`${image_path}`} alt="question_image" />}
       </div>
     </div>
   );

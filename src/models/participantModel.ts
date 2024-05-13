@@ -1,5 +1,4 @@
 export type ParticipantModel = {
-  id: number;
+  participant_id: number;
   name: string;
-  score: number;
 };

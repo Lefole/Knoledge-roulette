@@ -8,7 +8,7 @@ import { useQuestionRandom } from "../state/questionRandom";
 const Roulette = () => {
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [mustSpin, setMustSpin] = useState(false);
-  const [rouletteData, loading] = useRouletteLoading();
+  const [rouletteData, loading, subjects] = useRouletteLoading();
   const { setRouletteResult, setStartSpin } = useRouletteSpin();
   const { setQuestionResult } = useQuestionRandom();
 
@@ -29,7 +29,7 @@ const Roulette = () => {
         innerBorderWidth={2}
         textColors={["#fff"]}
         textDistance={55}
-        fontSize={16}
+        fontSize={14}
         backgroundColors={[
           "#e02627",
           "#f09317",
@@ -42,7 +42,7 @@ const Roulette = () => {
         ]}
         onStopSpinning={() => {
           setMustSpin(false);
-          setRouletteResult(prizeNumber);
+          setRouletteResult(subjects[prizeNumber].subject_id);
           setStartSpin(false);
         }}
       />
