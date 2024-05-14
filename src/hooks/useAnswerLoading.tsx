@@ -22,6 +22,6 @@ export const useAnswersLoading = (): [AnswerModel[], boolean, number] => {
     );
     setLoading(false);
   }, [question]);
-  //TODO: REVISAR SI EL ALBERT LA CAGO
+
   return [anwsers, loading, randomFalseAnswer];
 };

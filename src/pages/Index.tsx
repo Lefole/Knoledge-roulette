@@ -32,17 +32,22 @@ const Index = () => {
           </h1>
           <Link
             onClick={async () => {
+              const rounds = 5;
+              const period = 1;
               if (participants != null) {
                 const participantsIds: string[] = participants.map(
                   (participant) => `${participant.participant_id}`
                 );
-                try {
-                  //const createdGame = await createGame(1, participantsIds, 5);
-                  const createdGame = "";
-                  setGame(createdGame, 5, participants.length);
-                } catch (error) {
-                  setGame("", 5, participants.length);
-                }
+                const createdGame = await createGame(
+                  period,
+                  participantsIds,
+                  rounds
+                );
+                setGame(
+                  createdGame["game_id"],
+                  createdGame["rounds"],
+                  participantsIds.length
+                );
               }
             }}
             to={"game"}

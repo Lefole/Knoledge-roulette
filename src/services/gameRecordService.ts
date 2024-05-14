@@ -1,10 +1,20 @@
 import { axiosInstance } from "../config/axios_config";
 
+export const getScoresFromAllParticipants = async (gameId: string) => {
+  const scores = await axiosInstance(`games/scores/${gameId}`);
+  return scores.data["scores"];
+};
+
 export const getGameRecordByGameAndParticipant = async (
-  gameId: number,
+  gameId: string,
   participantId: string
 ) => {
-  const gameRecord = await axiosInstance.get("gameRecord");
+  const gameRecord = await axiosInstance.get("records/participant_game", {
+    params: {
+      game_id: gameId,
+      participant_id: participantId,
+    },
+  });
   return gameRecord.data;
 };
 
@@ -13,12 +23,10 @@ export const createGame = async (
   participantsList: string[],
   rounds: number
 ) => {
-  const gameCreated = await axiosInstance.post("game", [
-    {
-      period_id: period_id,
-      participants_id: participantsList,
-      rounds: rounds,
-    },
-  ]);
+  const gameCreated = await axiosInstance.post("games", {
+    period_id: period_id,
+    participants: participantsList,
+    rounds: rounds,
+  });
   return gameCreated.data;
 };

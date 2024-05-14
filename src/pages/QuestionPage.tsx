@@ -21,6 +21,7 @@ const QuestionPage = () => {
     currentRound,
     maxRounds,
     currentParticipantIndex,
+    maxParticpants,
     changeParticipant,
     incrementRound,
     resetParticipantsIndex,
@@ -66,7 +67,9 @@ const QuestionPage = () => {
                   className={clsx("", {
                     hidden:
                       fifthy_fifthy &&
-                      answers[randomFalseAnswer].option_id != value.option_id &&
+                      answers.filter(
+                        (answer) => answer.option_id == randomFalseAnswer
+                      )[0].option_id != value.option_id &&
                       !value.is_correct,
                   })}
                 />
@@ -78,11 +81,14 @@ const QuestionPage = () => {
         <ContinueButton
           key={"bttn_continue_question_page"}
           destinyRoute="../"
-          end={maxRounds == currentRound && currentParticipantIndex == 2}
+          end={
+            maxRounds == currentRound &&
+            currentParticipantIndex == maxParticpants
+          }
           disabled={option == -1}
           onClick={() => {
             changeParticipant();
-            if (currentParticipantIndex >= 2) {
+            if (currentParticipantIndex >= maxParticpants) {
               incrementRound();
               resetParticipantsIndex();
             }

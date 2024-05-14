@@ -14,7 +14,6 @@ const QuestionsView = () => {
   const { setQuestionResult } = useQuestionRandom();
 
   useEffect(() => {
-    console.log(questions.length);
     if (!loading && questions.length > 0) {
       setIsSelecting(true);
       const interval = setInterval(() => {

@@ -1,5 +1,14 @@
-const updateLifelineStatus = (idParticipant: number, lifeline: string) => {
-  return;
+import { axiosInstance } from "../config/axios_config";
+
+const updateLifelineStatus = async (
+  recordId: string,
+  lifelineIndex: number
+) => {
+  const updatedStatus = await axiosInstance.put("records/comodindindin", {
+    record_id: recordId,
+    comodindindin: lifelineIndex,
+  });
+  return updatedStatus.data;
 };
 
 export { updateLifelineStatus };

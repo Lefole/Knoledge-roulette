@@ -1,17 +1,25 @@
 import { useParticipantsLoading } from "../hooks/useParticipantsLoading";
+import useParticipantsScoresLoading from "../hooks/useParticipantsScoresLoading";
 import ParticipantRow from "./ParticipantRow";
 
 const ScoreTable = () => {
-  const [participants, loading] = useParticipantsLoading(true);
+  const [participantsScores, loading] = useParticipantsScoresLoading();
+  const [participants, loading_participants] = useParticipantsLoading();
   return (
     <div className="flex flex-col">
       {!loading &&
-        participants.map((value, index) => (
+        !loading_participants &&
+        participantsScores.map((value, index) => (
           <ParticipantRow
             key={index}
-            name={value.name}
+            name={
+              participants.find(
+                (participant) =>
+                  participant.participant_id == value.participant_id
+              )!.name
+            }
             score={0}
-            first={index == 0 && 0 != 0}
+            first={index == 0 && participantsScores[0].score != 0}
           />
         ))}
     </div>

@@ -32,7 +32,6 @@ const Cronometer = () => {
         type="number"
         placeholder="Tiempo"
         value={numberSpinValue}
-        defaultValue={0}
         onChange={(event) => {
           setNumberSpinValue(parseInt(event.currentTarget.value));
         }}
