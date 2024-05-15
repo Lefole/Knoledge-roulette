@@ -1,4 +1,3 @@
-import React from "react";
 import { useRoundStore } from "../state/roundStore";
 import DareButton from "./DareButton";
 import { RiEmotionSadFill, RiEmotionHappyFill } from "react-icons/ri";
@@ -23,20 +22,23 @@ const DareSection = () => {
 
   const handleDareButtonPressed = async (dareComplete: boolean) => {
     //TODO: AÑADIR DARE COMPLETE FUNCTION
-    if (currentParticipantIndex < maxParticpants - 1) {
+    if (currentParticipantIndex <= maxParticpants - 1) {
       if (dareComplete) {
         setDareComplete(true);
         await getGameRecordByGameAndParticipant(
           gameId,
           participants[currentParticipantIndex].participant_id
         ).then(async (game_record) => {
-          console.log(game_record["record_id"]);
           await updateDareResult(game_record["record_id"]);
         });
         setDareComplete(false);
       }
-
       changeParticipant();
+      if (currentParticipantIndex >= maxParticpants - 1) {
+        console.log(currentParticipantIndex);
+        resetParticipantsIndex();
+        incrementRound();
+      }
     } else {
       resetParticipantsIndex();
       incrementRound();

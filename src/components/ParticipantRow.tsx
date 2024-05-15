@@ -6,17 +6,19 @@ interface ParticipantRowProps {
   name: string;
   score: number;
   first?: boolean;
+  currentParticipant: boolean;
 }
 
 const ParticipantRow: React.FC<ParticipantRowProps> = ({
   name,
   score,
   first,
+  currentParticipant,
 }) => {
   return (
     <div
       className={clsx("flex justify-between px-1", {
-        "bg-green-200 rounded-sm": first,
+        "bg-green-200 rounded-sm": currentParticipant,
       })}
     >
       <div className="flex items-center gap-2">

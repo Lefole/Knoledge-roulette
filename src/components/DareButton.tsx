@@ -12,7 +12,7 @@ const DareButton: React.FC<DareButtonProps> = ({ end, children, onClick }) => {
     <Link
       className="bg-blue-800 h-10 rounded-md w-20 flex justify-center items-center shadow-md
       hover:shadow-lg hover:bg-blue-900 active:bg-blue-950"
-      to={end ? "resume" : ""}
+      to={end ? "../resume" : ""}
       onClick={() => onClick()}
     >
       {children}
