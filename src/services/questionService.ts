@@ -11,3 +11,10 @@ export const getanswersByQuestion = async (questionId: number) => {
   const answers = await axiosInstance.get(`options/${questionId}`);
   return answers.data;
 };
+
+export const getQuestionImage = async (questionId: number) => {
+  const image = await axiosInstance.get(`questions/image/${questionId}`, {
+    responseType: "blob",
+  });
+  return image.data;
+};

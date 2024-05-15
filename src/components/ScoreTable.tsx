@@ -18,7 +18,7 @@ const ScoreTable = () => {
                   participant.participant_id == value.participant_id
               )!.name
             }
-            score={0}
+            score={participantsScores[index].score}
             first={index == 0 && participantsScores[0].score != 0}
           />
         ))}

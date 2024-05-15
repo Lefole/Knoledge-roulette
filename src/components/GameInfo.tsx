@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import ComodinSection from "./ComodinSection";
 import { useRoundStore } from "../state/roundStore";
 import RoundProgress from "./RoundProgress";
+import DareSection from "./DareSection";
 
 const GameInfo = () => {
   const { pathname } = useLocation();
@@ -17,11 +18,9 @@ const GameInfo = () => {
         <ScoreTable />
       </div>
 
-      {pathname === "/game/" && (
+      {pathname === "/game" && (
         <div className="mt-auto">
-          <h3 className="mb-2 w-full text-xl font-semibold italic text-neutral-700">
-            Reto
-          </h3>
+          <DareSection />
         </div>
       )}
       {pathname.includes("question") && (
