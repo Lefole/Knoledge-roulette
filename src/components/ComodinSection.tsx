@@ -1,74 +1,74 @@
-import { FaPhone } from "react-icons/fa";
-import { FaPeopleGroup } from "react-icons/fa6";
-import LifelineButton from "./LifelineButton";
-import { useLifelinePressed } from "../state/lifelinePressed";
-import useParticipantsLifelines from "../hooks/useParticipantsLifelines";
-import { useParticipantsLoading } from "../hooks/useParticipantsLoading";
-import { useRoundStore } from "../state/roundStore";
-import { getGameRecordByGameAndParticipant } from "../services/gameRecordService";
-import { updateLifelineStatus } from "../services/lifelineService";
-import { useState } from "react";
+// import { FaPhone } from "react-icons/fa";
+// import { FaPeopleGroup } from "react-icons/fa6";
+// import LifelineButton from "./LifelineButton";
+// import { useLifelinePressed } from "../state/lifelinePressed";
+// import useParticipantsLifelines from "../hooks/useParticipantsLifelines";
+// import { useParticipantsLoading } from "../hooks/useParticipantsLoading";
+// import { useRoundStore } from "../state/roundStore";
+// import { getGameRecordByGameAndParticipant } from "../services/gameRecordService";
+// import { updateLifelineStatus } from "../services/lifelineService";
+// import { useState } from "react";
 
-const ComodinSection = () => {
-  const [disabledButton1, setDisabledButton1] = useState(false);
-  const [disabledButton2, setDisabledButton2] = useState(false);
-  const [disabledButton3, setDisabledButton3] = useState(false);
+// const ComodinSection = () => {
+//   const [disabledButton1, setDisabledButton1] = useState(false);
+//   const [disabledButton2, setDisabledButton2] = useState(false);
+//   const [disabledButton3, setDisabledButton3] = useState(false);
 
-  const { fifthy_fifthy, setFiftyPressed } = useLifelinePressed();
-  const [lifelines, loading] = useParticipantsLifelines();
-  const [participants] = useParticipantsLoading();
-  const { currentParticipantIndex, gameId } = useRoundStore();
+//   const { fifthy_fifthy, setFiftyPressed } = useLifelinePressed();
+//   const [lifelines, loading] = useParticipantsLifelines();
+//   const [participants] = useParticipantsLoading();
+//   const { currentParticipantIndex, gameId } = useRoundStore();
 
-  const handleLifelinePressed = async (lifelineIndex: number) => {
-    const participantId = participants[currentParticipantIndex].participant_id;
-    await getGameRecordByGameAndParticipant(gameId, participantId)
-      .then((game_record) => game_record)
-      .then((game_record_json) => {
-        updateLifelineStatus(game_record_json["record_id"], lifelineIndex);
-      });
-  };
+//   const handleLifelinePressed = async (lifelineIndex: number) => {
+//     const participantId = participants[currentParticipantIndex].participant_id;
+//     await getGameRecordByGameAndParticipant(gameId, participantId)
+//       .then((game_record) => game_record)
+//       .then((game_record_json) => {
+//         updateLifelineStatus(game_record_json["record_id"], lifelineIndex);
+//       });
+//   };
 
-  return (
-    <>
-      <h3 className="mb-5 w-full text-xl font-semibold italic text-neutral-700">
-        Comodines
-      </h3>
-      <div className="mb-5 flex h-30 w-full items-center justify-between gap-2 ">
-        {!loading && lifelines.length > 0 && (
-          <>
-            <LifelineButton
-              disabled={!lifelines[0].isAvailable || disabledButton1}
-              onClick={async () => {
-                if (lifelines[0].isAvailable) await handleLifelinePressed(0);
-                setDisabledButton1(true);
-              }}
-            >
-              <FaPeopleGroup size={40} />
-            </LifelineButton>
-            <LifelineButton
-              disabled={!lifelines[1].isAvailable || disabledButton2}
-              onClick={async () => {
-                if (!fifthy_fifthy) setFiftyPressed(true);
-                if (lifelines[1].isAvailable) await handleLifelinePressed(1);
-                setDisabledButton2(true);
-              }}
-            >
-              50:50
-            </LifelineButton>
-            <LifelineButton
-              disabled={!lifelines[2].isAvailable || disabledButton3}
-              onClick={async () => {
-                if (lifelines[2].isAvailable) await handleLifelinePressed(2);
-                setDisabledButton3(true);
-              }}
-            >
-              <FaPhone size={30} />
-            </LifelineButton>
-          </>
-        )}
-      </div>
-    </>
-  );
-};
+//   return (
+//     <>
+//       <h3 className="mb-5 w-full text-xl font-semibold italic text-neutral-700">
+//         Comodines
+//       </h3>
+//       <div className="mb-5 flex h-30 w-full items-center justify-between gap-2 ">
+//         {!loading && lifelines.length > 0 && (
+//           <>
+//             <LifelineButton
+//               disabled={!lifelines[0].isAvailable || disabledButton1}
+//               onClick={async () => {
+//                 if (lifelines[0].isAvailable) await handleLifelinePressed(0);
+//                 setDisabledButton1(true);
+//               }}
+//             >
+//               <FaPeopleGroup size={40} />
+//             </LifelineButton>
+//             <LifelineButton
+//               disabled={!lifelines[1].isAvailable || disabledButton2}
+//               onClick={async () => {
+//                 if (!fifthy_fifthy) setFiftyPressed(true);
+//                 if (lifelines[1].isAvailable) await handleLifelinePressed(1);
+//                 setDisabledButton2(true);
+//               }}
+//             >
+//               50:50
+//             </LifelineButton>
+//             <LifelineButton
+//               disabled={!lifelines[2].isAvailable || disabledButton3}
+//               onClick={async () => {
+//                 if (lifelines[2].isAvailable) await handleLifelinePressed(2);
+//                 setDisabledButton3(true);
+//               }}
+//             >
+//               <FaPhone size={30} />
+//             </LifelineButton>
+//           </>
+//         )}
+//       </div>
+//     </>
+//   );
+// };
 
-export default ComodinSection;
+// export default ComodinSection;

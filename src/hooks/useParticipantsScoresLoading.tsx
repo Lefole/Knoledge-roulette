@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getScoresFromAllParticipants } from "../services/gameRecordService";
-import { useRoundStore } from "../state/roundStore";
+
 import { useOptionPressed } from "../state/optionPressed";
 import { useDarePressed } from "../state/darePressed";
+import { useGameStore } from "../state/gameStore";
 
 export interface Score {
   participant_id: string;
@@ -11,7 +12,7 @@ export interface Score {
 
 const useParticipantsScoresLoading = (): [Score[], boolean] => {
   const [participantsScores, setParticipantsScores] = useState<Score[]>([]);
-  const { gameId } = useRoundStore();
+  const { gameId } = useGameStore();
   const { option } = useOptionPressed();
   const { dare_complete } = useDarePressed();
   const [loading, setLoading] = useState(false);

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
-import { useRouletteSpin } from "../state/rouletteSpin";
+import { useRouletteSpin } from "../../../state/rouletteSpin";
 import { CircularProgress } from "@mui/material";
-import { useQuestionsLoading } from "../hooks/useQuestionsLoading";
-import { useQuestionRandom } from "../state/questionRandom";
+import { useQuestionsLoading } from "../../../hooks/useQuestionsLoading";
+import { useQuestionRandom } from "../../../state/questionRandom";
 
 const QuestionsView = () => {
   const { startSpin } = useRouletteSpin();

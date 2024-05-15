@@ -1,15 +1,18 @@
 import { useParticipantsLoading } from "../hooks/useParticipantsLoading";
 import useParticipantsScoresLoading from "../hooks/useParticipantsScoresLoading";
-import { useRoundStore } from "../state/roundStore";
+import { useParticipantStore } from "../state/participanStore";
 import ParticipantRow from "./ParticipantRow";
 
 const ScoreTable = () => {
-  const [participantsScores, loading] = useParticipantsScoresLoading();
+  const [participantsScores, loading_scores] = useParticipantsScoresLoading();
   const [participants, loading_participants] = useParticipantsLoading();
-  const { currentParticipantIndex } = useRoundStore();
+  const { participantId } = useParticipantStore();
+  console.log(participants);
+  console.log(participantsScores);
+
   return (
-    <div className="flex flex-col">
-      {!loading &&
+    <div className="w-full max-h-[100px]">
+      {!loading_scores &&
         !loading_participants &&
         participantsScores.map((value, index) => (
           <ParticipantRow
@@ -21,11 +24,7 @@ const ScoreTable = () => {
               )!.name
             }
             score={participantsScores[index].score}
-            first={index == 0 && participantsScores[0].score != 0}
-            currentParticipant={
-              participants[currentParticipantIndex].participant_id ==
-              value.participant_id
-            }
+            currentParticipant={participantId == value.participant_id}
           />
         ))}
     </div>

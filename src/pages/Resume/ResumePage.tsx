@@ -1,8 +1,8 @@
 import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
-import useParticipantsLoading from "../hooks/useParticipantsLoading";
+import useParticipantsLoading from "../../hooks/useParticipantsLoading";
 import { useEffect } from "react";
-import { ParticipantModel } from "../models/participantModel";
-import useGameRecordLoading from "../hooks/useGameRecordLoading";
+import { ParticipantModel } from "../../models/participantModel";
+import useGameRecordLoading from "../../hooks/useGameRecordLoading";
 
 const ResumePage = () => {
   const [scores, loading] = useGameRecordLoading();

@@ -5,11 +5,16 @@ import { useEffect, useState } from "react";
 const FeedbackOptionScreen = () => {
   const { option, correct } = useOptionPressed();
   const [showAmungus, setShowAmungus] = useState(false);
-  useEffect(() => {
+
+  const handleOptionSelected = () => {
     if (option != -1) setShowAmungus(true);
     setTimeout(() => {
       setShowAmungus(false);
     }, 1800);
+  };
+
+  useEffect(() => {
+    handleOptionSelected();
   }, [option]);
   return (
     <div

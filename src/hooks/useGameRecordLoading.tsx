@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { getScoresFromAllParticipants } from "../services/gameRecordService";
-import { useRoundStore } from "../state/roundStore";
+
 import { GameRecordModel } from "../models/gameRecordModel";
+import { useGameStore } from "../state/gameStore";
 
 const useGameRecordLoading = (): [
   scores: GameRecordModel[],
   loading: boolean
 ] => {
-  const { gameId } = useRoundStore();
+  const { gameId } = useGameStore();
   const [scores, setScores] = useState<GameRecordModel[]>([]);
   const [loading, setLoading] = useState(false);
 

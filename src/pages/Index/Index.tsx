@@ -1,13 +1,29 @@
-import uets_logo from "../assets/uets_logo.png";
-import salesianos_logo from "../assets/salesianos-logo.png";
+import uets_logo from "../../assets/uets_logo.png";
+import salesianos_logo from "../../assets/salesianos-logo.png";
 import { Link } from "react-router-dom";
-import { createGame } from "../services/gameRecordService";
-import { useParticipantsLoading } from "../hooks/useParticipantsLoading";
-import { useRoundStore } from "../state/roundStore";
+import { useParticipantsLoading } from "../../hooks/useParticipantsLoading";
+import { useGameStore } from "../../state/gameStore";
+import { createNewGame } from "../../services/gameService";
 
 const Index = () => {
-  const { setGame } = useRoundStore();
-  const [participants] = useParticipantsLoading();
+  const { setGameId } = useGameStore();
+  const [participants, participants_loading] = useParticipantsLoading();
+
+  const handleInitGame = async () => {
+    const rounds = 5;
+    const period = 1;
+    if (participants_loading) return;
+
+    const participantsIds: string[] = participants.map(
+      (participant) => `${participant.participant_id}`
+    );
+
+    const createdGame = await createNewGame(participantsIds, period, rounds);
+    //if (createdGame) return;
+
+    setGameId(createdGame!);
+  };
+
   return (
     <div className="relative h-screen w-screen">
       <div
@@ -25,31 +41,12 @@ const Index = () => {
             </div>
           </div>
         </div>
-
         <div className="flex h-5/6 w-1/3 flex-col items-center py-10">
           <h1 className="mb-20 text-center text-6xl font-extrabold text-blue-400">
             RULETA DEL SABER
           </h1>
           <Link
-            onClick={async () => {
-              const rounds = 5;
-              const period = 1;
-              if (participants != null) {
-                const participantsIds: string[] = participants.map(
-                  (participant) => `${participant.participant_id}`
-                );
-                const createdGame = await createGame(
-                  period,
-                  participantsIds,
-                  rounds
-                );
-                setGame(
-                  createdGame["game_id"],
-                  createdGame["rounds"],
-                  participantsIds.length
-                );
-              }
-            }}
+            onClick={async () => await handleInitGame()}
             to={"game"}
             className="w-fit rounded-full border-2 border-neutral-300 bg-blue-400 px-8 py-2 text-xl font-semibold text-white shadow-lg hover:scale-105 hover:bg-blue-500"
           >

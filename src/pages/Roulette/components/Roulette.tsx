@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Wheel } from "react-custom-roulette";
-import { useRouletteLoading } from "../hooks/useRouletteFetching";
+import { useRouletteLoading } from "../../../hooks/useRouletteFetching";
 import { CircularProgress } from "@mui/material";
-import { useRouletteSpin } from "../state/rouletteSpin";
-import { useQuestionRandom } from "../state/questionRandom";
+import { useRouletteSpin } from "../../../state/rouletteSpin";
+import { useQuestionRandom } from "../../../state/questionRandom";
 
 const Roulette = () => {
   const [prizeNumber, setPrizeNumber] = useState(0);

@@ -1,16 +1,16 @@
-import OptionButton from "../components/OptionButton";
+import OptionButton from "../../components/OptionButton";
 import { clsx } from "clsx";
-import ContinueButton from "../components/ContinueButton";
-import { useOptionPressed } from "../state/optionPressed";
-import QuestionPlace from "../components/QuestionPlace";
-import { useLifelinePressed } from "../state/lifelinePressed";
-import { useQuestionRandom } from "../state/questionRandom";
-import { useAnswersLoading } from "../hooks/useAnswerLoading";
-import { useRouletteSpin } from "../state/rouletteSpin";
+import ContinueButton from "../../components/ContinueButton";
+import { useOptionPressed } from "../../state/optionPressed";
+import QuestionPlace from "../../components/QuestionPlace";
+import { useLifelinePressed } from "../../state/lifelinePressed";
+import { useQuestionRandom } from "../../state/questionRandom";
+import { useAnswersLoading } from "../../hooks/useAnswerLoading";
+import { useRouletteSpin } from "../../state/rouletteSpin";
 import { useRoundStore } from "../state/roundStore";
-import { getGameRecordByGameAndParticipant } from "../services/gameRecordService";
-import { postAnswerResult } from "../services/answersService";
-import { useParticipantsLoading } from "../hooks/useParticipantsLoading";
+import { getGameRecordByGameAndParticipant } from "../../services/gameRecordService";
+import { postAnswerResult } from "../../services/answersService";
+import { useParticipantsLoading } from "../../hooks/useParticipantsLoading";
 
 const QuestionPage = () => {
   const { option, setOption, setCorrect } = useOptionPressed();

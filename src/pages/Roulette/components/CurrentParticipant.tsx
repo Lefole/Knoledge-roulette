@@ -1,3 +1,4 @@
+import SelectInput from "@mui/material/Select/SelectInput";
 import React from "react";
 
 type CurrentParticipantProps = {
@@ -14,6 +15,7 @@ const CurrentParticipant: React.FC<CurrentParticipantProps> = ({
         rounded-md bg-fuchsia-700 text-white"
       >
         <h3 className="ml-10 text-2xl font-semibold">Turno de:</h3>
+        <SelectInput autoWidth multiple native />
         <p className="text-xl">{participantName}</p>
       </div>
     </div>
