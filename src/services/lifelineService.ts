@@ -9,7 +9,6 @@ const updateLifelineStatus = async (
     {},
     { params: { record_id: recordId, comodindindin: lifelineIndex } }
   );
-  console.log(updatedStatus.data);
   return updatedStatus.data;
 };
 

@@ -24,7 +24,6 @@ const useParticipantsLifelines = (): [LifelineModel[], boolean] => {
         },
         { lifeline: "call_help", isAvailable: data["call_help"] },
       ]);
-      console.log(lifelines[0].isAvailable);
     });
     setLoading(false);
   }, [gameId, currentParticipantIndex, participants]);

@@ -5,13 +5,13 @@ import GameInfo from "../components/GameInfo";
 
 const Game = () => {
   return (
-    <div className="relative h-screen w-screen flex justify-center items-center">
+    <div className="relative h-screen w-screen flex justify-center items-center p-0 m-0">
       {/* <FeedbackOptionScreen /> */}
       <div className="inline-flex w-full h-fit">
         <div className="w-[500px] h-[700px] p-10">
-          <Container classname="h-full " children={<GameInfo />} />
+          <Container classname="h-full" children={<GameInfo />} />
         </div>
-        <div className="w-full ">{/* <Outlet /> */}</div>
+        <div className="w-full h-[700px]">{<Outlet />}</div>
       </div>
     </div>
   );

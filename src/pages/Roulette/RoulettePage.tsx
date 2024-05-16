@@ -7,22 +7,17 @@ import { useQuestionRandom } from "../../state/questionRandom";
 import { useParticipantsLoading } from "../../hooks/useParticipantsLoading";
 
 const RoulettePage = () => {
-  const [participants, loading] = useParticipantsLoading();
+  const [participants, participants_loading] = useParticipantsLoading();
   const { roulete_result } = useRouletteSpin();
   const { question_result } = useQuestionRandom();
   return (
-    <div className="flex h-full w-full flex-col gap-10">
-      {/* <CurrentParticipant
-        participantName={
-          !loading && participants.length != 0
-            ? participants[currentParticipantIndex].name
-            : ""
-        }
-      /> */}
-      <div className="flex h-4/6 w-full items-center justify-around gap-10">
+    <div className="p-10 pl-0 flex w-full flex-col gap-10">
+      <CurrentParticipant />
+      {/* <div className="flex h-4/6 w-full items-center justify-around gap-10">
         <Roulette />
         <QuestionsView />
-      </div>
+      </div> */}
+
       <div className="mr-20 flex h-1/6 items-center justify-end">
         <ContinueButton
           onClick={() => {}}

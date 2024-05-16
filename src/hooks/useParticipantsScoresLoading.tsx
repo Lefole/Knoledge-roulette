@@ -20,8 +20,8 @@ const useParticipantsScoresLoading = (): [Score[], boolean] => {
     setLoading(true);
     getScoresFromAllParticipants(gameId).then((data: Score[]) => {
       setParticipantsScores(data.sort((a, b) => b.score - a.score));
+      setLoading(false);
     });
-    setLoading(false);
   }, [gameId, option, dare_complete]);
   return [participantsScores, loading];
 };

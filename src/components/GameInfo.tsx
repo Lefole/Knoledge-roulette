@@ -4,7 +4,7 @@ import ScoreTable from "./ScoreTable";
 // import ComodinSection from "./ComodinSection";
 
 // import RoundProgress from "./RoundProgress";
-// import DareSection from "./DareSection";
+import DareSection from "./DareSection";
 
 const GameInfo = () => {
   const { pathname } = useLocation();
@@ -19,9 +19,7 @@ const GameInfo = () => {
         <ScoreTable />
       </div>
 
-      {pathname === "/game" && (
-        <div className="mt-auto">{/* <DareSection /> */}</div>
-      )}
+      {pathname === "/game" && <div className="mt-auto">{<DareSection />}</div>}
       {pathname.includes("question") && (
         <div className="mt-auto">{/* <ComodinSection /> */}</div>
       )}

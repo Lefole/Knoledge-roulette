@@ -1,23 +1,37 @@
-import SelectInput from "@mui/material/Select/SelectInput";
 import React from "react";
+import Select from "react-select";
+import { useParticipantsLoading } from "../../../hooks/useParticipantsLoading";
+import { useParticipantStore } from "../../../state/participanStore";
 
-type CurrentParticipantProps = {
-  participantName: string;
-};
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
-const CurrentParticipant: React.FC<CurrentParticipantProps> = ({
-  participantName,
-}) => {
+const CurrentParticipant: React.FC = () => {
+  const [participants] = useParticipantsLoading();
+  const { setCurrentParticipant } = useParticipantStore();
+
   return (
-    <div className="h-1/6">
-      <div
-        className="mx-10  flex h-full items-center justify-start gap-2 
-        rounded-md bg-fuchsia-700 text-white"
-      >
-        <h3 className="ml-10 text-2xl font-semibold">Turno de:</h3>
-        <SelectInput autoWidth multiple native />
-        <p className="text-xl">{participantName}</p>
-      </div>
+    <div
+      className="h-14 items-center justify-start gap-10 inline-flex
+        rounded-md bg-fuchsia-700 text-white px-10 mx-10"
+    >
+      <h3 className="w-auto text-2xl font-semibold flex-shrink-0">Turno de:</h3>
+      <Select
+        options={participants.map((participant) => {
+          const participantAdapted = {
+            value: participant.participant_id,
+            label: participant.name,
+          };
+          return participantAdapted;
+        })}
+        className="w-full text-slate-800"
+        onChange={(value) => {
+          setCurrentParticipant(value!.value);
+        }}
+      />
     </div>
   );
 };

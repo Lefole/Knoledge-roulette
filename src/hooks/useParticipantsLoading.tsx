@@ -9,8 +9,8 @@ export const useParticipantsLoading = (): [ParticipantModel[], boolean] => {
     setLoading(true);
     getAllParticipants().then((data: ParticipantModel[]) => {
       setParticipants(data);
+      setLoading(false);
     });
-    setLoading(false);
   }, []);
   return [participants, loading];
 };
