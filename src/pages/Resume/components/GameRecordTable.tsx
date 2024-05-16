@@ -5,8 +5,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import useGameRecordLoading from "../../../hooks/useGameRecordLoading";
-// import { useParticipantsLoading } from "../../../hooks/useParticipantsLoading";
 import { GameRecordModel } from "../../../models/gameRecordModel";
 import { getAllRecordsFromGame } from "../../../services/gameRecordService";
 import { useGameStore } from "../../../state/gameStore";
@@ -44,15 +42,13 @@ const columns = [
 
 const GameRecordTable = () => {
   const { gameId } = useGameStore();
-  const [scores, scores_loading] = useGameRecordLoading();
-  //   const [participants, participants_loading] = useParticipantsLoading();
   const [data, setData] = React.useState<GameRecordModel[]>([]);
 
   useEffect(() => {
     getAllRecordsFromGame(gameId).then((data) => {
       setData(data);
     });
-  }, []);
+  }, [gameId]);
 
   const table = useReactTable({
     data,

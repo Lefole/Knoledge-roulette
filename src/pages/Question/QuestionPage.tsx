@@ -56,6 +56,7 @@ const QuestionPage = () => {
             answers.map((value, index) => (
               <OptionButton
                 key={index}
+                index={index}
                 value={value.option_id}
                 optionSelected={option}
                 text={value.option_text}
