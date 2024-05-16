@@ -2,12 +2,7 @@ import React from "react";
 import Select from "react-select";
 import { useParticipantsLoading } from "../../../hooks/useParticipantsLoading";
 import { useParticipantStore } from "../../../state/participanStore";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+import { Link } from "react-router-dom";
 
 const CurrentParticipant: React.FC = () => {
   const [participants] = useParticipantsLoading();
@@ -15,7 +10,7 @@ const CurrentParticipant: React.FC = () => {
 
   return (
     <div
-      className="h-14 items-center justify-start gap-10 inline-flex
+      className="z-10 h-14 items-center justify-start gap-10 inline-flex
         rounded-md bg-fuchsia-700 text-white px-10 mx-10"
     >
       <h3 className="w-auto text-2xl font-semibold flex-shrink-0">Turno de:</h3>
@@ -32,6 +27,13 @@ const CurrentParticipant: React.FC = () => {
           setCurrentParticipant(value!.value);
         }}
       />
+      <Link
+        className="bg-red-600 h-8 flex justify-center items-center p-2 rounded-md flex-shrink-0
+      hover:bg-red-700 active:bg-red-800"
+        to={"../resume"}
+      >
+        Terminar juego
+      </Link>
     </div>
   );
 };

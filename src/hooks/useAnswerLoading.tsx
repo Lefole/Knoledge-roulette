@@ -18,9 +18,9 @@ export const useAnswersLoading = (): [AnswerModel[], boolean, number] => {
         const false_answers = anwsers.filter((value) => !value.is_correct);
         const randomNumber = Math.floor(Math.random() * false_answers.length);
         setRandomFalseAnswer(false_answers[randomNumber].option_id);
+        setLoading(false);
       }
     );
-    setLoading(false);
   }, [question]);
 
   return [anwsers, loading, randomFalseAnswer];

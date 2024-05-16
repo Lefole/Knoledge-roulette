@@ -6,4 +6,5 @@ export type GameRecordModel = {
   participant_id: string;
   record_id: string;
   score: number;
+  challenge_points: number;
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import correctSound from "../assets/correct sound.wav";
-import incorrectSound from "../assets/incorrect sound.wav";
+import correctSound from "../../../assets/correct sound.wav";
+import incorrectSound from "../../../assets/incorrect sound.wav";
 import { twMerge } from "tailwind-merge";
 
 interface OptionButtonProps {

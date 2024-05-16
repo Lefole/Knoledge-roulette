@@ -4,8 +4,10 @@ import { useRouletteLoading } from "../../../hooks/useRouletteFetching";
 import { CircularProgress } from "@mui/material";
 import { useRouletteSpin } from "../../../state/rouletteSpin";
 import { useQuestionRandom } from "../../../state/questionRandom";
+import { useParticipantStore } from "../../../state/participanStore";
 
 const Roulette = () => {
+  const { participantId } = useParticipantStore();
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [mustSpin, setMustSpin] = useState(false);
   const [rouletteData, loading, subjects] = useRouletteLoading();
@@ -51,9 +53,11 @@ const Roulette = () => {
         className="mt-4 w-auto rounded-lg bg-blue-800 p-2 px-10 text-center font-semibold text-white shadow-md hover:bg-blue-900 active:bg-blue-950"
         type="button"
         onClick={() => {
+          if (participantId == "") return;
           setQuestionResult(-1, null);
-          const randomPrize = Math.floor(Math.random() * rouletteData.length);
           setStartSpin(true);
+
+          const randomPrize = Math.floor(Math.random() * rouletteData.length);
           setPrizeNumber(randomPrize);
           setMustSpin(true);
         }}

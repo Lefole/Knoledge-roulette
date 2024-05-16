@@ -6,7 +6,7 @@ import { useGameStore } from "../state/gameStore";
 
 const useGameRecordLoading = (): [
   scores: GameRecordModel[],
-  loading: boolean
+  loading: boolean,
 ] => {
   const { gameId } = useGameStore();
   const [scores, setScores] = useState<GameRecordModel[]>([]);
@@ -16,8 +16,8 @@ const useGameRecordLoading = (): [
     setLoading(true);
     getScoresFromAllParticipants(gameId).then((data: GameRecordModel[]) => {
       setScores(data);
+      setLoading(false);
     });
-    setLoading(false);
   }, [gameId]);
 
   return [scores, loading];

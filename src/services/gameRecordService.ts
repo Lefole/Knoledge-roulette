@@ -5,6 +5,11 @@ export const getScoresFromAllParticipants = async (gameId: string) => {
   return scores.data["scores"];
 };
 
+export const getAllRecordsFromGame = async (gameId: string) => {
+  const scores = await axiosInstance(`records/game/${gameId}`);
+  return scores.data;
+};
+
 export const getGameRecordByGameAndParticipant = async (
   gameId: string,
   participantId: string

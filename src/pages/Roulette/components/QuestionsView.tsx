@@ -8,13 +8,13 @@ import { useQuestionRandom } from "../../../state/questionRandom";
 
 const QuestionsView = () => {
   const { startSpin } = useRouletteSpin();
-  const [questions, loading] = useQuestionsLoading();
+  const [questions, questions_loading] = useQuestionsLoading();
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(-1);
   const [, setIsSelecting] = useState(false);
   const { setQuestionResult } = useQuestionRandom();
 
   useEffect(() => {
-    if (!loading && questions.length > 0) {
+    if (!questions_loading && questions.length > 0) {
       setIsSelecting(true);
       const interval = setInterval(() => {
         setSelectedQuestionIndex(Math.floor(Math.random() * questions.length));
@@ -28,19 +28,19 @@ const QuestionsView = () => {
         setQuestionResult(randomQuestion, questions[randomQuestion]);
       }, 2000);
     }
-  }, [loading, questions]);
+  }, [questions_loading, questions]);
 
   return (
-    <div className="flex flex-col h-full items-center w-1/3">
-      <h3 className="mb-8 text-3xl font-semibold text-neutral-700 h-10 w-full text-center">
+    <div className="flex flex-col h-full items-center w-1/2">
+      <h3 className="mt-10 text-3xl font-semibold text-neutral-700 h-10 w-full text-center mb-5">
         Preguntas
       </h3>
-      {startSpin || loading ? (
+      {startSpin || questions_loading ? (
         <div className="flex h-full w-full justify-center">
           <CircularProgress size={80} color="success" className="mt-16" />
         </div>
       ) : (
-        <div className="grid h-fit max-h-96 w-full grid-cols-5 gap-4">
+        <div className="grid h-fit max-h-96 w-[350px] grid-cols-5 gap-4">
           {questions.map((_, index) => (
             <div
               key={index}

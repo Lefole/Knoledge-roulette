@@ -1,5 +1,5 @@
 import { LuTimerReset } from "react-icons/lu";
-import { useCountdown } from "../hooks/useCountdown";
+import { useCountdown } from "../../../hooks/useCountdown";
 import { LuPlus } from "react-icons/lu";
 import { LuMinus } from "react-icons/lu";
 import { useState } from "react";

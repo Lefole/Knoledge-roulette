@@ -8,6 +8,7 @@ import RoulettePage from "./pages/Roulette/RoulettePage";
 import ResumePage from "./pages/Resume/ResumePage";
 import ProtectedGameRoute from "./components/ProtectedGameRoute";
 import Index from "./pages/Index/Index";
+import QuestionPage from "./pages/Question/QuestionPage";
 
 // const router = createBrowserRouter([
 //   {
@@ -41,10 +42,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route element={<ProtectedGameRoute />}>
           <Route path="/game" element={<Game />}>
             <Route path="" element={<RoulettePage />} />
-            {/* <Route path="/question" element={<QuestionPage />} /> */}
+            <Route path="/game/question" element={<QuestionPage />} />
           </Route>
 
-          <Route path="/resume" element={<ResumePage />}></Route>
+          <Route path="/resume" element={<ResumePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

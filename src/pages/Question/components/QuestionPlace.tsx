@@ -1,6 +1,6 @@
 import React from "react";
 import Cronometer from "./Cronometer";
-import useQuestionImageLoading from "../hooks/useQuestionImageLoading";
+import useQuestionImageLoading from "../../../hooks/useQuestionImageLoading";
 
 interface QuestionPlaceProps {
   questionId: number;

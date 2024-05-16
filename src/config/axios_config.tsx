@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://roulette-uets.onrender.com/api/v1",
+  baseURL: import.meta.env.VITE_API_HOST,
   timeout: 10000,
   headers: {},
 });
