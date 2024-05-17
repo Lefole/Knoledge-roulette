@@ -30,10 +30,10 @@ const columns = [
     cell: (info) => (!info.getValue() ? "X" : ""),
     header: "50:50",
   }),
-  columnHelper.accessor("call_help", {
-    cell: (info) => (!info.getValue() ? "X" : ""),
-    header: "Llamada",
-  }),
+  // columnHelper.accessor("call_help", {
+  //   cell: (info) => (!info.getValue() ? "X" : ""),
+  //   header: "Llamada",
+  // }),
   columnHelper.accessor("challenge_points", {
     cell: (info) => info.getValue(),
     header: "Reto",

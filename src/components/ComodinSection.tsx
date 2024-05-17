@@ -32,7 +32,7 @@ const ComodinSection = () => {
       <h3 className="mb-5 w-full text-xl font-semibold italic text-neutral-700">
         Comodines
       </h3>
-      <div className="mb-5 flex h-30 w-full items-center justify-evenly gap-2 ">
+      <div className="mb-5 flex h-30 w-full items-center justify-between gap-2 ">
         {!loading && lifelines.length > 0 && (
           <>
             <LifelineButton
@@ -54,16 +54,17 @@ const ComodinSection = () => {
             >
               50:50
             </LifelineButton>
-            {/* TODO: REVISAR SI SE VA A USAR */}
-            {/* <LifelineButton
-              disabled={!lifelines[2].isAvailable || disabledButton3}
+
+            <LifelineButton
+              disabled={true}
+              // disabled={!lifelines[2].isAvailable || disabledButton3}
               onClick={async () => {
                 if (lifelines[2].isAvailable) await handleLifelinePressed(2);
                 setDisabledButton3(true);
               }}
             >
               <FaPhone size={30} />
-            </LifelineButton> */}
+            </LifelineButton>
           </>
         )}
       </div>
