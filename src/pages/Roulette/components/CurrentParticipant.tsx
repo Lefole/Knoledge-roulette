@@ -28,11 +28,11 @@ const CurrentParticipant: React.FC = () => {
         }}
       />
       <Link
-        className="bg-red-600 h-8 flex justify-center items-center p-2 rounded-md flex-shrink-0
-      hover:bg-red-700 active:bg-red-800"
+        className="bg-blue-600 h-8 flex justify-center items-center p-2 rounded-md flex-shrink-0
+      hover:bg-blue-700 active:bg-blue-800"
         to={"../resume"}
       >
-        Terminar juego
+        Puntuación
       </Link>
     </div>
   );
