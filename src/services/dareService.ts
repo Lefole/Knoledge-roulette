@@ -5,7 +5,7 @@ export const updateDareResult = async (recordId: string) => {
   const gameRecord = await axiosInstance.put(
     url,
     {},
-    { params: { record_id: recordId } }
+    { params: { record_id: recordId, amount: 2 } }
   );
   return gameRecord.data;
 };
