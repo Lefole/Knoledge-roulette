@@ -5,6 +5,8 @@ import { getGameRecordByGameAndParticipant } from "../services/gameRecordService
 import { updateDareResult } from "../services/dareService";
 import { useGameStore } from "../state/gameStore";
 import { useParticipantStore } from "../state/participanStore";
+import correctSound from "../assets/correct sound.wav";
+import incorrectSound from "../assets/incorrect sound.wav";
 
 const DareSection = () => {
   const { participantId } = useParticipantStore();
@@ -32,12 +34,21 @@ const DareSection = () => {
         <DareButton
           children={<RiEmotionSadFill color="#ffffff" size={30} />}
           onClick={async () => {
+            if (participantId != "") {
+              const audio = new Audio(incorrectSound);
+              audio.play();
+            }
             await handleDareButtonPressed(false);
           }}
         />
         <DareButton
           children={<RiEmotionHappyFill color="#ffffff" size={30} />}
           onClick={async () => {
+            if (participantId != "") {
+              const audio = new Audio(correctSound);
+              audio.play();
+            }
+
             await handleDareButtonPressed(true);
           }}
         />

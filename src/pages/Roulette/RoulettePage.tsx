@@ -11,7 +11,10 @@ const RoulettePage = () => {
   const { roulete_result } = useRouletteSpin();
   const { question_result } = useQuestionRandom();
   return (
-    <div className="p-10 h-full pl-0 flex w-full flex-col">
+    <div
+      className="p-10 h-full pl-0 flex w-full flex-col"
+      onKeyDown={(key) => console.log(key.code)}
+    >
       <CurrentParticipant />
       <div className="flex h-full w-full items-center justify-around gap-10">
         <Roulette />

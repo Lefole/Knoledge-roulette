@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
+  SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { GameRecordModel } from "../../../models/gameRecordModel";
@@ -40,6 +42,10 @@ const columns = [
     cell: (info) => info.getValue(),
     header: "Puntaje",
   }),
+  columnHelper.accessor("total", {
+    cell: (info) => info.getValue(),
+    header: "Total",
+  }),
 ];
 
 const GameRecordTable = () => {
@@ -47,6 +53,9 @@ const GameRecordTable = () => {
   const [data, setData] = React.useState<GameRecordModel[]>([]);
   const [participants, participants_loading] = useParticipantsLoading();
   const [loading, setLoading] = useState(false);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: "total", desc: true },
+  ]);
 
   useEffect(() => {
     setLoading(true);
@@ -61,6 +70,8 @@ const GameRecordTable = () => {
           );
           game_record.participant_id = "";
           if (participant) game_record.participant_id = participant.name;
+
+          game_record.total = game_record.challenge_points + game_record.score;
           setLoading(false);
           return game_record;
         }
@@ -73,6 +84,12 @@ const GameRecordTable = () => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    enableSorting: true,
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+    },
   });
 
   return (
@@ -87,12 +104,34 @@ const GameRecordTable = () => {
               >
                 {headerGroup.headers.map((header) => (
                   <th key={header.id} className="px-10 ">
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
+                    {header.isPlaceholder ? null : (
+                      <div
+                        className={
+                          header.column.getCanSort()
+                            ? "cursor-pointer select-none"
+                            : ""
+                        }
+                        onClick={header.column.getToggleSortingHandler()}
+                        title={
+                          header.column.getCanSort()
+                            ? header.column.getNextSortingOrder() === "asc"
+                              ? "Sort ascending"
+                              : header.column.getNextSortingOrder() === "desc"
+                                ? "Sort descending"
+                                : "Clear sort"
+                            : undefined
+                        }
+                      >
+                        {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                        {{
+                          asc: " 🔼",
+                          desc: " 🔽",
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
+                    )}
                   </th>
                 ))}
               </tr>

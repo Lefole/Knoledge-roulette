@@ -1,7 +1,7 @@
 // import ScoreTable from "./ScoreTable";
 import { useLocation } from "react-router-dom";
 import ScoreTable from "./ScoreTable";
-// import ComodinSection from "./ComodinSection";
+import ComodinSection from "./ComodinSection";
 
 // import RoundProgress from "./RoundProgress";
 import DareSection from "./DareSection";
@@ -21,7 +21,7 @@ const GameInfo = () => {
 
       {pathname === "/game" && <div className="mt-auto">{<DareSection />}</div>}
       {pathname.includes("question") && (
-        <div className="mt-auto">{/* <ComodinSection /> */}</div>
+        <div className="mt-auto">{<ComodinSection />}</div>
       )}
     </div>
   );

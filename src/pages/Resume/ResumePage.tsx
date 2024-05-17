@@ -34,6 +34,7 @@ const ResumePage = () => {
           to={".."}
           onClick={() => {
             setGameId("");
+            setCurrentParticipant("");
           }}
         >
           Terminar Juego

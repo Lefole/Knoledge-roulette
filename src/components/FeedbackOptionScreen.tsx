@@ -1,9 +1,11 @@
 import clsx from "clsx";
 import { useOptionPressed } from "../state/optionPressed";
 import { useEffect, useState } from "react";
+import { useDarePressed } from "../state/darePressed";
 
 const FeedbackOptionScreen = () => {
   const { option, correct } = useOptionPressed();
+  const { dare_complete } = useDarePressed();
   const [showAmungus, setShowAmungus] = useState(false);
 
   const handleOptionSelected = () => {
@@ -15,10 +17,11 @@ const FeedbackOptionScreen = () => {
 
   useEffect(() => {
     handleOptionSelected();
-  }, [option]);
+  }, [option, dare_complete]);
+
   return (
     <div
-      className={clsx("absolute z-10 h-full w-full", {
+      className={clsx("absolute z-20 h-full w-full", {
         flex: showAmungus,
         hidden: !showAmungus,
       })}

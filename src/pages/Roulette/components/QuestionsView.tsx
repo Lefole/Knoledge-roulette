@@ -12,10 +12,12 @@ const QuestionsView = () => {
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(-1);
   const [, setIsSelecting] = useState(false);
   const { setQuestionResult } = useQuestionRandom();
+  const [key, setKey] = useState("");
 
   useEffect(() => {
-    if (!questions_loading && questions.length > 0) {
+    if (!questions_loading && questions.length > 0 && key != "") {
       setIsSelecting(true);
+      setKey("");
       const interval = setInterval(() => {
         setSelectedQuestionIndex(Math.floor(Math.random() * questions.length));
       }, 100);
@@ -28,7 +30,7 @@ const QuestionsView = () => {
         setQuestionResult(randomQuestion, questions[randomQuestion]);
       }, 2000);
     }
-  }, [questions_loading, questions]);
+  }, [questions_loading, questions, key]);
 
   return (
     <div className="flex flex-col h-full items-center w-1/2">
@@ -40,7 +42,13 @@ const QuestionsView = () => {
           <CircularProgress size={80} color="success" className="mt-16" />
         </div>
       ) : (
-        <div className="grid h-fit max-h-96 w-[350px] grid-cols-5 gap-4">
+        <div
+          className="grid h-fit max-h-96 w-[350px] grid-cols-5 gap-4 focus:border-none "
+          tabIndex={0}
+          onKeyDownCapture={(key) => {
+            setKey(key.code);
+          }}
+        >
           {questions.map((_, index) => (
             <div
               key={index}
