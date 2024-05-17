@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# Knowledge Roulette
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Knowledge Roulette application is a project developed with React, designed to promote learning and academic competition among various educational units. This project was created for the Unidad Educativa Técnico Salesiano, standing out as an interactive and entertaining educational tool.
 
-Currently, two official plugins are available:
+## Use
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. Clone the repository
 
-## Expanding the ESLint configuration
+Clone the repository on your local machine.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+git clone <repositorio_url>
+cd <nombre_del_repositorio>
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 2. Create .env file
+
+In the root directory, create a `.env` file. This file contains the URL of the backend service with which this application works.
+
+```js
+VITE_API_HOST = "api_host_url";
+```
+
+### 3. InstalL dependencies
+
+Install the project dependencies
+
+```bash
+npm install
+# o
+pnpm install
+```
+
+### 4. Run proyect
+
+Execute the project in dev mode with the command:
+
+```bash
+npm run dev
+# o
+pnpm run dev
+```
