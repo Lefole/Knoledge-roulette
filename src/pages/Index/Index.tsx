@@ -25,13 +25,16 @@ const Index = () => {
   };
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative h-screen w-screen flex">
       <div
-        className="bg-clip border-triangle absolute top-0 -z-20 h-5/6 
+        className="border-triangle absolute top-0 -z-20 h-full
         w-3/5 bg-gradient-to-br from-blue-600 via-blue-400 via-50% to-transparent"
       ></div>
-      <div className="flex h-full items-center justify-around">
-        <div className="flex h-5/6 w-1/3 flex-col justify-center">
+      {/* <div className="absolute top-0 left-0 justify-center items-center  w-full h-full">
+        <div className="flex h-full w-full items-center justify-center">a</div>
+      </div> */}
+      <div className="flex h-full items-center w-full">
+        <div className="flex h-5/6 w-3/5 flex-col justify-center">
           <div className="mb-auto flex w-full justify-center">
             <img src={uets_logo} alt="logo uets" />
           </div>
@@ -41,8 +44,8 @@ const Index = () => {
             </div>
           </div>
         </div>
-        <div className="flex h-5/6 w-1/3 flex-col items-center py-10">
-          <h1 className="mb-20 text-center text-6xl font-extrabold text-blue-400">
+        <div className="flex h-full w-2/5 flex-col items-center py-10 border-l-2 border-l-slate-300  border-opacity-60">
+          <h1 className="mt-20 mb-20 text-center text-6xl font-extrabold text-blue-400 px-20">
             RULETA DEL SABER
           </h1>
           <Link
