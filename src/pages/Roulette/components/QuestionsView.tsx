@@ -11,26 +11,50 @@ const QuestionsView = () => {
   const [questions, questions_loading] = useQuestionsLoading();
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(-1);
   const [, setIsSelecting] = useState(false);
-  const { setQuestionResult } = useQuestionRandom();
+  const { setQuestionResult, questions_used } = useQuestionRandom();
   const [key, setKey] = useState("");
 
   useEffect(() => {
     if (!questions_loading && questions.length > 0 && key != "") {
+      const filteredQuestions = questions.filter(
+        (quest) => !questions_used.includes(quest.question_id)
+      );
+
       setIsSelecting(true);
       setKey("");
       const interval = setInterval(() => {
-        setSelectedQuestionIndex(Math.floor(Math.random() * questions.length));
+        const randomQuestionIndex = Math.floor(
+          Math.random() * filteredQuestions.length
+        );
+        const selectedQuestion = filteredQuestions[randomQuestionIndex];
+        const selectedQuestionIndexInAllQuestions = questions.findIndex(
+          (quest) => quest.question_id === selectedQuestion.question_id
+        );
+
+        setSelectedQuestionIndex(selectedQuestionIndexInAllQuestions);
       }, 100);
 
       setTimeout(() => {
         clearInterval(interval);
         setIsSelecting(false);
-        const randomQuestion = Math.floor(Math.random() * questions.length);
-        setSelectedQuestionIndex(randomQuestion);
-        setQuestionResult(randomQuestion, questions[randomQuestion]);
+        const randomQuestionIndex = Math.floor(
+          Math.random() * filteredQuestions.length
+        );
+        const selectedQuestion = filteredQuestions[randomQuestionIndex];
+
+        const selectedQuestionIndexInAllQuestions = questions.findIndex(
+          (quest) => quest.question_id === selectedQuestion.question_id
+        );
+
+        setSelectedQuestionIndex(selectedQuestionIndexInAllQuestions);
+
+        setQuestionResult(
+          selectedQuestionIndexInAllQuestions,
+          questions[selectedQuestionIndexInAllQuestions]
+        );
       }, 2000);
     }
-  }, [questions_loading, questions, key]);
+  }, [questions_loading, questions, key, questions_used]);
 
   return (
     <div className="flex flex-col h-full items-center w-1/2">
@@ -49,7 +73,7 @@ const QuestionsView = () => {
             setKey(key.code);
           }}
         >
-          {questions.map((_, index) => (
+          {questions.map((value, index) => (
             <div
               key={index}
               className={twMerge(
@@ -57,7 +81,17 @@ const QuestionsView = () => {
                 clsx({
                   "bg-red-500": selectedQuestionIndex === index,
 
-                  "bg-slate-500": selectedQuestionIndex !== index,
+                  "bg-slate-500":
+                    selectedQuestionIndex !== index &&
+                    questions_used.findIndex(
+                      (quest_id) => quest_id == value.question_id
+                    ) == -1,
+
+                  "bg-slate-500 opacity-30":
+                    selectedQuestionIndex !== index &&
+                    questions_used.findIndex(
+                      (quest_id) => quest_id == value.question_id
+                    ) != -1,
                 })
               )}
             >

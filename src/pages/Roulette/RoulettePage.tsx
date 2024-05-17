@@ -9,7 +9,7 @@ import { useParticipantStore } from "../../state/participanStore";
 const RoulettePage = () => {
   const { participantId } = useParticipantStore();
   const { roulete_result } = useRouletteSpin();
-  const { question_result } = useQuestionRandom();
+  const { question_result, add_question_used, question } = useQuestionRandom();
   return (
     <div
       className="p-10 h-full pl-0 flex w-full flex-col"
@@ -23,7 +23,9 @@ const RoulettePage = () => {
 
       <div className="mr-20 flex h-14 items-center justify-end">
         <ContinueButton
-          onClick={() => {}}
+          onClick={() => {
+            add_question_used(question?.question_id ?? -1);
+          }}
           end={false}
           destinyRoute={
             roulete_result == -1 || question_result == -1 || participantId == ""

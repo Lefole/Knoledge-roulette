@@ -8,9 +8,11 @@ interface questionRandomStore {
     questionResult: number,
     questionObject: QuestionModel | null
   ) => void;
+  questions_used: number[];
+  add_question_used: (question_id: number) => void;
 }
 
-export const useQuestionRandom = create<questionRandomStore>((set) => ({
+export const useQuestionRandom = create<questionRandomStore>((set, get) => ({
   question_result: -1,
   question: null,
   setQuestionResult: (
@@ -21,4 +23,9 @@ export const useQuestionRandom = create<questionRandomStore>((set) => ({
       question_result: questionRestult,
       question: questionObject,
     })),
+  questions_used: [],
+  add_question_used: (question_id: number) =>
+    set({
+      questions_used: [...get().questions_used, question_id],
+    }),
 }));
