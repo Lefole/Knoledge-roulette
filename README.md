@@ -21,7 +21,7 @@ In the root directory, create a `.env` file. This file contains the URL of the b
 VITE_API_HOST = "api_host_url";
 ```
 
-### 3. InstalL dependencies
+### 3. Install dependencies
 
 Install the project dependencies
 
