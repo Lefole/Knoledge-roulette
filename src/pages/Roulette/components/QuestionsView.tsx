@@ -1,60 +1,16 @@
-import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useRouletteSpin } from "../../../state/rouletteSpin";
 import { CircularProgress } from "@mui/material";
 import { useQuestionsLoading } from "../../../hooks/useQuestionsLoading";
 import { useQuestionRandom } from "../../../state/questionRandom";
+import { useRQuestionSelector } from "../../../hooks/useQuestionSelector";
 
 const QuestionsView = () => {
   const { startSpin } = useRouletteSpin();
   const [questions, questions_loading] = useQuestionsLoading();
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(-1);
-  const [, setIsSelecting] = useState(false);
-  const { setQuestionResult, questions_used } = useQuestionRandom();
-  const [key, setKey] = useState("");
-
-  useEffect(() => {
-    if (!questions_loading && questions.length > 0 && key != "") {
-      const filteredQuestions = questions.filter(
-        (quest) => !questions_used.includes(quest.question_id)
-      );
-
-      setIsSelecting(true);
-      setKey("");
-      const interval = setInterval(() => {
-        const randomQuestionIndex = Math.floor(
-          Math.random() * filteredQuestions.length
-        );
-        const selectedQuestion = filteredQuestions[randomQuestionIndex];
-        const selectedQuestionIndexInAllQuestions = questions.findIndex(
-          (quest) => quest.question_id === selectedQuestion.question_id
-        );
-
-        setSelectedQuestionIndex(selectedQuestionIndexInAllQuestions);
-      }, 100);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        setIsSelecting(false);
-        const randomQuestionIndex = Math.floor(
-          Math.random() * filteredQuestions.length
-        );
-        const selectedQuestion = filteredQuestions[randomQuestionIndex];
-
-        const selectedQuestionIndexInAllQuestions = questions.findIndex(
-          (quest) => quest.question_id === selectedQuestion.question_id
-        );
-
-        setSelectedQuestionIndex(selectedQuestionIndexInAllQuestions);
-
-        setQuestionResult(
-          selectedQuestionIndexInAllQuestions,
-          questions[selectedQuestionIndexInAllQuestions]
-        );
-      }, 2000);
-    }
-  }, [questions_loading, questions, key, questions_used]);
+  const { questions_used } = useQuestionRandom();
+  const [selectedQuestionIndex, setKey] = useRQuestionSelector();
 
   return (
     <div className="flex flex-col h-full items-center w-1/2">
@@ -67,7 +23,7 @@ const QuestionsView = () => {
         </div>
       ) : (
         <div
-          className="grid h-fit max-h-96 w-[350px] grid-cols-5 gap-4 focus:border-none "
+          className="grid h-fit max-h-96 w-[350px] grid-cols-5 gap-4 focus:border-4 "
           tabIndex={0}
           onKeyDownCapture={(key) => {
             setKey(key.code);
